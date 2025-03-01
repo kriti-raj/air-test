@@ -1,4 +1,3 @@
-// src/components/PropertyDetails.jsx
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import {
@@ -16,6 +15,7 @@ import {
   FaTshirt,
   FaFire,
 } from "react-icons/fa";
+import { FiClock } from "react-icons/fi";
 import GuestDropdown from "./GuestDropdown";
 import { GiCook, GiWashingMachine } from "react-icons/gi";
 import { MdWarning } from "react-icons/md";
@@ -189,44 +189,65 @@ export default function PropertyDetails() {
           </div>
         </div>
 
-        {/* Right Section - Booking Card */}
-        <div className="w-68 border rounded-xl p-6 shadow-md shadow-gray-300 shadow-lg h-fit sticky top-20">
-          <div className="flex justify-between items-center mb-4">
-            <div>
-              <span className="text-2xl font-semibold">
-                <span className="line-through text-gray-500">₹5,000</span>{" "}
-                ₹3,600
-              </span>
-              <span className="text-gray-600"> night</span>
-            </div>
-          </div>
-
-          <div className="border rounded-lg">
-            <div className="flex border-b">
-              <div className="flex-1 p-3 border-r">
-                <label className="text-xs font-semibold">CHECK-IN</label>
-                <DatePicker
-                  selected={new Date()}
-                  className="w-full outline-none"
-                />
+        {/* Right Section */}
+        <div className="flex flex-col gap-4 sticky top-10 h-[calc(100vh-100px)]">
+          <div className="flex flex-col gap-4 overflow-y-auto pb-4">
+            {/* Card 1 */}
+            <div className="w-72 border rounded-xl p-6 shadow-lg bg-white">
+              <div className="flex justify-between items-center mb-4">
+                <div>
+                  <span className="text-2xl font-semibold">
+                    <span className="line-through text-gray-500">₹5,000</span>{" "}
+                    ₹3,600
+                  </span>
+                  <span className="text-gray-600"> night</span>
+                </div>
               </div>
-              <div className="flex-1 p-3">
-                <label className="text-xs font-semibold">CHECKOUT</label>
-                <DatePicker
-                  selected={new Date()}
-                  className="w-full outline-none"
-                />
+
+              <div className="border rounded-lg">
+                <div className="flex border-b">
+                  <div className="flex-1 p-3 border-r">
+                    <label className="text-xs font-semibold">CHECK-IN</label>
+                    <DatePicker
+                      selected={new Date()}
+                      className="w-full outline-none"
+                    />
+                  </div>
+                  <div className="flex-1 p-3">
+                    <label className="text-xs font-semibold">CHECKOUT</label>
+                    <DatePicker
+                      selected={new Date()}
+                      className="w-full outline-none"
+                    />
+                  </div>
+                </div>
+                <GuestDropdown />
+              </div>
+
+              <button className="w-full mt-4 bg-red-500 text-white py-3 rounded-full font-semibold hover:bg-red-600 transition-colors">
+                Reserve
+              </button>
+              <div className="text-center text-xs mt-2 text-gray-600">
+                You won't be charged yet
               </div>
             </div>
 
-            <GuestDropdown />
-          </div>
+            {/* card 2 */}
+            <div className="w-72 border rounded-xl p-4 shadow-lg bg-white relative">
+              <div className="absolute top-5 left-3">
+                <FiClock className="text-2xl text-black" />
+              </div>
 
-          <button className="w-full mt-4 bg-airbnb-pink text-white py-3 rounded-full font-semibold bg-red-500">
-            Reserve
-          </button>
-          <div className="text-center text-xs mt-2 text-gray-600">
-            You won't be charged yet
+              <div className="pl-8">
+                {" "}
+                <div className="text-lg font-semibold text-black">
+                  Special offer: Save ₹3,600
+                </div>
+                <p className="text-xs text-gray-500 mt-1">
+                  This Host is offering a deal on their first 3 bookings.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>

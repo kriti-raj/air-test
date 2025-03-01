@@ -1,4 +1,3 @@
-// // src/components/Header.jsx
 import { BiSearch, BiUserCircle } from "react-icons/bi";
 
 export default function Header() {

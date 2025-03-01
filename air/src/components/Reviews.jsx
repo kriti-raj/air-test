@@ -1,4 +1,3 @@
-// src/components/Reviews.jsx
 export default function Reviews() {
   const reviews = [
     {
@@ -9,7 +8,7 @@ export default function Reviews() {
       comment:
         "Amazing place! The photos don't do it justice. Perfect location and the host was very responsive.",
     },
-    // Add more reviews
+
   ];
 
   return (

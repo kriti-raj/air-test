@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { FaRegUser } from "react-icons/fa";
-import { FaTimes } from 'react-icons/fa';
+import { FaRegUser, FaTimes } from "react-icons/fa";
 import { RiArrowDropDownLine } from "react-icons/ri";
 
 const GuestDropdown = () => {
@@ -57,20 +56,19 @@ const GuestDropdown = () => {
     .filter(Boolean)
     .join(", ");
 
-    return (
-        <div className="p-3 relative">
-          <label className="text-xs font-semibold">GUESTS</label>
-          <div 
-            className="flex items-center justify-between mt-1 cursor-pointer border rounded-lg p-2"
-            onClick={() => setIsOpen(!isOpen)}
-          >
-            <span>{guestSummary || 'Add guests'}</span>
-            <RiArrowDropDownLine className="text-black" />
-          </div>
-    
-          {isOpen && (
-            <div className="absolute top-full left-0 right-0 bg-white border rounded-lg shadow-lg p-1 mt-2 z-10 w-full max-w-[400px]">
-            
+  return (
+    <div className="p-3 relative">
+      <label className="text-xs font-semibold">GUESTS</label>
+      <div
+        className="flex items-center justify-between mt-1 cursor-pointer border rounded-lg p-2"
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        <span>{guestSummary || "Add guests"}</span>
+        <RiArrowDropDownLine className="text-black" />
+      </div>
+
+      {isOpen && (
+        <div className="absolute top-full left-0 right-0 bg-white border rounded-lg shadow-lg p-1 mt-2 z-10 w-full max-w-[400px]">
           <div className="mb-4 space-y-4">
             {/* Adults */}
             <div className="flex justify-between items-center">
@@ -177,7 +175,7 @@ const GuestDropdown = () => {
             infants, and {maxPets} pets
           </div>
 
-          {/* Close button at bottom */}
+          {/* Close button */}
           <div className=" pt-4 mt-4 flex justify-end">
             <button
               onClick={() => setIsOpen(false)}
@@ -186,7 +184,6 @@ const GuestDropdown = () => {
               Close
             </button>
           </div>
-
         </div>
       )}
     </div>

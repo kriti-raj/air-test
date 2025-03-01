@@ -1,16 +1,15 @@
-// src/components/PropertyGallery.jsx
 import { FiShare2, FiHeart } from "react-icons/fi";
 export default function PropertyGallery() {
   return (
     <div className=" mt-2 px-2 font-semibold text-xl max-w-7xl mx-auto border-t border-gray-300 pt-6 px-[180px]">
       {" "}
       <div className="flex justify-between items-center">
-        {/* Left-aligned text */}
+
         <div className="text-xl font-medium">
           Family Room: Nirvana Homes | Wooden House | Farm Stay
         </div>
 
-        {/* Right-aligned Share & Save buttons */}
+
         <div className="flex text-xs items-center gap-4">
           <div className="flex items-center gap-2 cursor-pointer hover:underline">
             <FiShare2 className="text-lg" /> Share
