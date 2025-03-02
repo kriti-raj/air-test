@@ -19,8 +19,8 @@ import { FiClock } from "react-icons/fi";
 import GuestDropdown from "./GuestDropdown";
 import { GiCook, GiWashingMachine } from "react-icons/gi";
 import { MdWarning } from "react-icons/md";
-import { useState } from 'react';
-import axios from 'axios';
+import { useState } from "react";
+import axios from "axios";
 
 export default function PropertyDetails() {
   const [checkInDate, setCheckInDate] = useState(null);
@@ -29,18 +29,17 @@ export default function PropertyDetails() {
     adults: 1,
     children: 0,
     infants: 0,
-    pets: 0
+    pets: 0,
   });
 
   const handleReservation = async () => {
-
     if (!checkInDate || !checkOutDate) {
-      alert('Please select check-in and check-out dates');
+      alert("Please select check-in and check-out dates");
       return;
     }
 
     if (guests.adults < 1) {
-      alert('At least one adult is required');
+      alert("At least one adult is required");
       return;
     }
     try {
@@ -51,30 +50,33 @@ export default function PropertyDetails() {
           adults: guests.adults,
           children: guests.children,
           infants: guests.infants,
-          pets: guests.pets
+          pets: guests.pets,
         },
-        totalGuests: guests.adults + guests.children
+        totalGuests: guests.adults + guests.children,
       };
 
-      const response = await axios.post('http://localhost:8000/api/reservations', reservationData);
-      alert('Reservation successful!');
+      const response = await axios.post(
+        "http://localhost:8000/api/reservations",
+        reservationData
+      );
+      alert("Reservation successful!");
       console.log('Reservation created:', response.data);
-      
+
       setCheckInDate(null);
       setCheckOutDate(null);
       setGuests({
         adults: 1,
         children: 0,
         infants: 0,
-        pets: 0
+        pets: 0,
       });
-
     } catch (error) {
-      alert('Reservation failed: ' + (error.response?.data?.error || error.message));
-      console.error('Reservation error:', error);
+      alert(
+        "Reservation failed: " + (error.response?.data?.error || error.message)
+      );
+      console.error("Reservation error:", error);
     }
   };
-
 
   return (
     <div className="max-w-7xl mx-auto py-8 px-[180px]">
@@ -283,11 +285,11 @@ export default function PropertyDetails() {
                 <GuestDropdown guests={guests} setGuests={setGuests} />
               </div>
 
-              <button 
-              onClick={handleReservation}
-              className="w-full mt-4 bg-red-500 text-white py-3 rounded-full font-semibold hover:bg-red-600 transition-colors"
+              <button
+                onClick={handleReservation}
+                className="w-full mt-4 bg-red-500 text-white py-3 rounded-full font-semibold hover:bg-red-600 transition-colors"
               >
-               Reserve
+                Reserve
               </button>
 
               <div className="text-center text-xs mt-2 text-gray-600">
