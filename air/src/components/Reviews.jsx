@@ -12,7 +12,7 @@ export default function Reviews() {
   ];
 
   return (
-    <div className="max-w-7xl mx-auto px-6 py-8 border-t border-gray-300 px-[180px]">
+    <div className="max-w-7xl mx-auto py-8 border-t border-gray-300 px-[180px]">
       <h2 className="text-2xl font-semibold mb-6">Reviews</h2>
       <div className="space-y-8">
         {reviews.map((review) => (

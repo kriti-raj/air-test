@@ -19,10 +19,65 @@ import { FiClock } from "react-icons/fi";
 import GuestDropdown from "./GuestDropdown";
 import { GiCook, GiWashingMachine } from "react-icons/gi";
 import { MdWarning } from "react-icons/md";
+import { useState } from 'react';
+import axios from 'axios';
 
 export default function PropertyDetails() {
+  const [checkInDate, setCheckInDate] = useState(null);
+  const [checkOutDate, setCheckOutDate] = useState(null);
+  const [guests, setGuests] = useState({
+    adults: 1,
+    children: 0,
+    infants: 0,
+    pets: 0
+  });
+
+  const handleReservation = async () => {
+
+    if (!checkInDate || !checkOutDate) {
+      alert('Please select check-in and check-out dates');
+      return;
+    }
+
+    if (guests.adults < 1) {
+      alert('At least one adult is required');
+      return;
+    }
+    try {
+      const reservationData = {
+        checkIn: checkInDate,
+        checkOut: checkOutDate,
+        guests: {
+          adults: guests.adults,
+          children: guests.children,
+          infants: guests.infants,
+          pets: guests.pets
+        },
+        totalGuests: guests.adults + guests.children
+      };
+
+      const response = await axios.post('http://localhost:8000/api/reservations', reservationData);
+      alert('Reservation successful!');
+      console.log('Reservation created:', response.data);
+      
+      setCheckInDate(null);
+      setCheckOutDate(null);
+      setGuests({
+        adults: 1,
+        children: 0,
+        infants: 0,
+        pets: 0
+      });
+
+    } catch (error) {
+      alert('Reservation failed: ' + (error.response?.data?.error || error.message));
+      console.error('Reservation error:', error);
+    }
+  };
+
+
   return (
-    <div className="max-w-7xl mx-auto px-6 py-8 px-[180px]">
+    <div className="max-w-7xl mx-auto py-8 px-[180px]">
       <div className="flex gap-8 ">
         {/* Left Section */}
         <div className="flex-1">
@@ -209,24 +264,32 @@ export default function PropertyDetails() {
                   <div className="flex-1 p-3 border-r">
                     <label className="text-xs font-semibold">CHECK-IN</label>
                     <DatePicker
-                      selected={new Date()}
+                      selected={checkInDate}
+                      onChange={(date) => setCheckInDate(date)}
                       className="w-full outline-none"
+                      placeholderText="Add date"
                     />
                   </div>
                   <div className="flex-1 p-3">
                     <label className="text-xs font-semibold">CHECKOUT</label>
                     <DatePicker
-                      selected={new Date()}
+                      selected={checkOutDate}
+                      onChange={(date) => setCheckOutDate(date)}
                       className="w-full outline-none"
+                      placeholderText="Add date"
                     />
                   </div>
                 </div>
-                <GuestDropdown />
+                <GuestDropdown guests={guests} setGuests={setGuests} />
               </div>
 
-              <button className="w-full mt-4 bg-red-500 text-white py-3 rounded-full font-semibold hover:bg-red-600 transition-colors">
-                Reserve
+              <button 
+              onClick={handleReservation}
+              className="w-full mt-4 bg-red-500 text-white py-3 rounded-full font-semibold hover:bg-red-600 transition-colors"
+              >
+               Reserve
               </button>
+
               <div className="text-center text-xs mt-2 text-gray-600">
                 You won't be charged yet
               </div>

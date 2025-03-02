@@ -1,7 +1,7 @@
 import { FiShare2, FiHeart } from "react-icons/fi";
 export default function PropertyGallery() {
   return (
-    <div className=" mt-2 px-2 font-semibold text-xl max-w-7xl mx-auto border-t border-gray-300 pt-6 px-[180px]">
+    <div className=" mt-2 font-semibold text-xl max-w-7xl mx-auto border-t border-gray-300 pt-6 px-[180px]">
       {" "}
       <div className="flex justify-between items-center">
 

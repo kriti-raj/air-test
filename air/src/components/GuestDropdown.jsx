@@ -1,12 +1,8 @@
 import { useState } from "react";
-import { FaRegUser, FaTimes } from "react-icons/fa";
 import { RiArrowDropDownLine } from "react-icons/ri";
 
-const GuestDropdown = () => {
-  const [adults, setAdults] = useState(1);
-  const [children, setChildren] = useState(0);
-  const [infants, setInfants] = useState(0);
-  const [pets, setPets] = useState(0);
+const GuestDropdown = ({ guests, setGuests }) => {
+  const { adults, children, infants, pets } = guests;
   const [isOpen, setIsOpen] = useState(false);
 
   const totalGuests = adults + children;
@@ -17,16 +13,24 @@ const GuestDropdown = () => {
   const handleIncrement = (type) => {
     switch (type) {
       case "adult":
-        if (totalGuests < maxMainGuests) setAdults((a) => a + 1);
+        if (totalGuests < maxMainGuests) {
+          setGuests(prev => ({ ...prev, adults: prev.adults + 1 }));
+        }
         break;
       case "child":
-        if (totalGuests < maxMainGuests) setChildren((c) => c + 1);
+        if (totalGuests < maxMainGuests) {
+          setGuests(prev => ({ ...prev, children: prev.children + 1 }));
+        }
         break;
       case "infant":
-        if (infants < maxInfants) setInfants((i) => i + 1);
+        if (infants < maxInfants) {
+          setGuests(prev => ({ ...prev, infants: prev.infants + 1 }));
+        }
         break;
       case "pet":
-        if (pets < maxPets) setPets((p) => p + 1);
+        if (pets < maxPets) {
+          setGuests(prev => ({ ...prev, pets: prev.pets + 1 }));
+        }
         break;
     }
   };
@@ -34,16 +38,24 @@ const GuestDropdown = () => {
   const handleDecrement = (type) => {
     switch (type) {
       case "adult":
-        if (adults > 0) setAdults((a) => a - 1);
+        if (adults > 1) {
+          setGuests(prev => ({ ...prev, adults: prev.adults - 1 }));
+        }
         break;
       case "child":
-        if (children > 0) setChildren((c) => c - 1);
+        if (children > 0) {
+          setGuests(prev => ({ ...prev, children: prev.children - 1 }));
+        }
         break;
       case "infant":
-        if (infants > 0) setInfants((i) => i - 1);
+        if (infants > 0) {
+          setGuests(prev => ({ ...prev, infants: prev.infants - 1 }));
+        }
         break;
       case "pet":
-        if (pets > 0) setPets((p) => p - 1);
+        if (pets > 0) {
+          setGuests(prev => ({ ...prev, pets: prev.pets - 1 }));
+        }
         break;
     }
   };
@@ -80,7 +92,7 @@ const GuestDropdown = () => {
                 <button
                   className="w-8 h-8 rounded-full border disabled:opacity-50"
                   onClick={() => handleDecrement("adult")}
-                  disabled={adults === 0}
+                  disabled={adults === 1}
                 >
                   -
                 </button>
@@ -175,8 +187,7 @@ const GuestDropdown = () => {
             infants, and {maxPets} pets
           </div>
 
-          {/* Close button */}
-          <div className=" pt-4 mt-4 flex justify-end">
+          <div className="pt-4 mt-4 flex justify-end">
             <button
               onClick={() => setIsOpen(false)}
               className="block text-right py-2 px-2 rounded-md hover:rounded-xl text-black underline hover:bg-gray-100 transition-colors"
